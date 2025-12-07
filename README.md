@@ -1,180 +1,286 @@
-# 🎵 TikTok Viral Video Downloader
+# 🎵 TikTok Auto Viral Video Downloader
 
-Programa en Python para descargar videos virales de TikTok de forma masiva.
+**Programa en Python que BUSCA y DESCARGA AUTOMÁTICAMENTE videos virales de TikTok** 🔥
 
-## 🚀 Características
+## 🚀 ¿Qué hace este programa?
 
-- ✅ Descarga videos de TikTok en alta calidad
-- ✅ Descarga múltiples videos desde un archivo de texto
-- ✅ Guarda metadatos del video (vistas, likes, comentarios, etc.)
-- ✅ Guarda miniaturas
-- ✅ Genera resumen JSON con estadísticas
-- ✅ Interfaz de línea de comandos fácil de usar
+✅ **BUSCA automáticamente** videos virales en TikTok
+✅ **DESCARGA** los videos más populares sin intervención manual
+✅ Busca por hashtags trending (#fyp, #viral, #foryou)
+✅ Busca por palabras clave
+✅ Extrae los videos más virales del día
+✅ Guarda metadatos (vistas, likes, comentarios)
+✅ Genera reportes con estadísticas
 
-## 📋 Requisitos
+---
 
-- Python 3.7 o superior
-- ffmpeg (opcional, pero recomendado para mejor procesamiento)
+## 📋 INSTALACIÓN RÁPIDA
 
-## 🔧 Instalación
+### 1. Instalar Python
+- Descarga Python 3.7+ desde: https://www.python.org/downloads/
 
-1. **Clonar o descargar este repositorio**
-
-2. **Instalar dependencias:**
+### 2. Instalar dependencias
 ```bash
-pip install -r requirements.txt
+pip install yt-dlp requests
 ```
 
-3. **Instalar ffmpeg (opcional pero recomendado):**
+¡Listo! Ya puedes usar el programa.
 
-En Ubuntu/Debian:
-```bash
-sudo apt install ffmpeg
-```
+---
 
-En macOS:
-```bash
-brew install ffmpeg
-```
+## 💻 USO SÚPER FÁCIL
 
-En Windows:
-Descarga desde https://ffmpeg.org/download.html
-
-## 💻 Uso
-
-### Descargar un solo video
+### 🔥 OPCIÓN 1: Descargar videos virales de HOY (automático)
 
 ```bash
-python tiktok_downloader.py -u https://www.tiktok.com/@user/video/123456789
+python tiktok_auto_downloader.py --trending 20
 ```
 
-### Descargar múltiples videos desde un archivo
+**Esto descargará los 20 videos MÁS VIRALES del día automáticamente.**
 
-1. Crea un archivo de texto (ej: `mis_videos.txt`) con las URLs:
-```
-https://www.tiktok.com/@user/video/123456789
-https://www.tiktok.com/@user/video/987654321
-https://www.tiktok.com/@user/video/456789123
-```
+---
 
-2. Ejecuta el descargador:
-```bash
-python tiktok_downloader.py -f mis_videos.txt
-```
-
-### Especificar directorio de salida
+### 🎯 OPCIÓN 2: Buscar por HASHTAG
 
 ```bash
-python tiktok_downloader.py -f mis_videos.txt -o videos_virales
+# Buscar videos virales con #viral
+python tiktok_auto_downloader.py --hashtag viral --count 15
+
+# Buscar con #fyp
+python tiktok_auto_downloader.py --hashtag fyp --count 20
+
+# Buscar con #parati
+python tiktok_auto_downloader.py --hashtag parati --count 10
 ```
 
-### Descargar sin metadatos
+---
+
+### 🔍 OPCIÓN 3: Buscar por PALABRA CLAVE
 
 ```bash
-python tiktok_downloader.py -u URL --no-metadata
+# Buscar "baile viral"
+python tiktok_auto_downloader.py --search "baile viral" --count 10
+
+# Buscar "comedia"
+python tiktok_auto_downloader.py --search "comedia" --count 15
+
+# Buscar "recetas"
+python tiktok_auto_downloader.py --search "recetas" --count 10
 ```
 
-## 📂 Estructura de archivos descargados
+---
+
+### ⚙️ OPCIONES PERSONALIZADAS
+
+```bash
+# Solo videos con más de 500,000 vistas
+python tiktok_auto_downloader.py --hashtag viral --count 20 --min-views 500000
+
+# Guardar en carpeta específica
+python tiktok_auto_downloader.py --trending 30 -o mis_videos_virales
+
+# Solo videos MUY virales (1+ millón de vistas)
+python tiktok_auto_downloader.py --hashtag fyp --count 50 --min-views 1000000
+```
+
+---
+
+## 🛠️ MÉTODO ALTERNATIVO (2 Pasos)
+
+Si el método automático no funciona, usa este proceso en 2 pasos:
+
+### PASO 1: Extraer URLs de videos virales
+
+```bash
+# Extraer de hashtags trending
+python tiktok_scraper.py --trending --max 30
+
+# Extraer de un hashtag específico
+python tiktok_scraper.py --hashtag viral --max 50
+```
+
+Esto creará un archivo `trending_urls.txt` con las URLs.
+
+### PASO 2: Descargar los videos
+
+```bash
+python tiktok_downloader.py -f trending_urls.txt
+```
+
+---
+
+## 📂 ¿Dónde se guardan los videos?
+
+Los videos se guardan en la carpeta `downloads/` (o la que especifiques):
 
 ```
 downloads/
-├── 1234567890_video_title.mp4       # Video
-├── 1234567890_video_title.jpg       # Miniatura
-├── 1234567890_video_title.info.json # Metadatos
-└── summary_20231207_120000.json     # Resumen de descarga
+├── 7123456789_baile_viral.mp4           # Video
+├── 7123456789_baile_viral.jpg           # Miniatura
+├── 7123456789_baile_viral.info.json     # Metadatos
+└── viral_summary_20251207_143000.json   # Resumen con estadísticas
 ```
 
-## 📊 Información guardada
+---
 
-El programa guarda la siguiente información de cada video:
+## 📊 Resumen de estadísticas
 
-- 🆔 ID del video
-- 📝 Título
-- 👤 Autor
-- 👁️ Vistas
-- ❤️ Likes
-- 💬 Comentarios
-- 🔄 Compartidos
-- ⏱️ Duración
-- 📅 Fecha de subida
-- 📄 Descripción
-- 🕒 Fecha de descarga
+El programa genera un archivo JSON con:
 
-## 🎯 Casos de uso
-
-### Para creadores de contenido:
-- Guardar videos de referencia para inspiración
-- Analizar tendencias virales
-- Crear biblioteca de contenido de competidores
-
-### Para marketers:
-- Investigar tendencias del mercado
-- Analizar contenido viral de marcas
-- Crear informes de análisis competitivo
-
-### Para investigadores:
-- Recopilar datos para análisis de redes sociales
-- Estudiar patrones de viralidad
-- Archivar contenido para estudios longitudinales
-
-## ⚙️ Opciones avanzadas
-
-### Uso como módulo de Python
-
-```python
-from tiktok_downloader import TikTokDownloader
-
-# Crear instancia
-downloader = TikTokDownloader(output_dir="mis_videos")
-
-# Descargar un video
-info = downloader.download_video("https://www.tiktok.com/@user/video/123")
-
-# Descargar desde archivo
-results = downloader.download_from_file("urls.txt")
+```json
+{
+  "total_videos": 20,
+  "estadisticas": {
+    "total_vistas": 50000000,
+    "total_likes": 10000000,
+    "promedio_vistas": 2500000,
+    "promedio_likes": 500000
+  },
+  "videos": [...]
+}
 ```
+
+---
+
+## 🎯 EJEMPLOS DE USO REAL
+
+### Caso 1: Investigar tendencias de baile
+```bash
+python tiktok_auto_downloader.py --search "baile 2025" --count 30 -o bailes_virales
+```
+
+### Caso 2: Descargar challenges populares
+```bash
+python tiktok_auto_downloader.py --hashtag challenge --count 25 --min-views 200000
+```
+
+### Caso 3: Análisis de contenido viral diario
+```bash
+python tiktok_auto_downloader.py --trending 50 -o analisis_diario
+```
+
+### Caso 4: Recopilar videos de un nicho específico
+```bash
+python tiktok_auto_downloader.py --search "marketing digital" --count 20
+```
+
+---
+
+## 🔧 COMANDOS DISPONIBLES
+
+### tiktok_auto_downloader.py (Descarga automática)
+
+| Opción | Descripción | Ejemplo |
+|--------|-------------|---------|
+| `--trending N` | Descarga N videos virales del día | `--trending 20` |
+| `--hashtag TAG` | Busca por hashtag | `--hashtag viral` |
+| `--search "TEXTO"` | Busca por palabra clave | `--search "comedia"` |
+| `--count N` | Número de videos a descargar | `--count 30` |
+| `--min-views N` | Vistas mínimas | `--min-views 500000` |
+| `-o DIR` | Carpeta de salida | `-o mis_videos` |
+
+### tiktok_scraper.py (Extractor de URLs)
+
+| Opción | Descripción | Ejemplo |
+|--------|-------------|---------|
+| `--trending` | Extrae de hashtags trending | `--trending` |
+| `--hashtag TAG` | Extrae de un hashtag | `--hashtag viral` |
+| `--max N` | Máximo de URLs | `--max 50` |
+| `-o FILE` | Archivo de salida | `-o urls.txt` |
+| `--json` | Guardar también en JSON | `--json` |
+
+### tiktok_downloader.py (Descarga manual)
+
+| Opción | Descripción | Ejemplo |
+|--------|-------------|---------|
+| `-u URL` | Descarga un video | `-u https://...` |
+| `-f FILE` | Descarga desde archivo | `-f urls.txt` |
+| `-o DIR` | Directorio de salida | `-o videos` |
+| `--no-metadata` | Sin metadatos | `--no-metadata` |
+
+---
 
 ## 🐛 Solución de problemas
 
-### Error: "Unable to download video"
-- Verifica que la URL sea correcta y pública
-- Algunos videos privados o restringidos no se pueden descargar
-- Prueba actualizar yt-dlp: `pip install -U yt-dlp`
+### ❌ "No se pudieron extraer videos"
 
-### Error: "ffmpeg not found"
-- Instala ffmpeg siguiendo las instrucciones de instalación
-- El programa funcionará sin ffmpeg pero con limitaciones
+**Solución:** Usa el método en 2 pasos (scraper + downloader)
 
-### Videos muy lentos
-- Verifica tu conexión a internet
-- TikTok puede limitar descargas masivas, espera entre descargas
+### ❌ "Unable to download video"
 
-## 📜 Licencia
+**Causas posibles:**
+- Video privado o eliminado
+- Límite de descarga de TikTok
 
-Este proyecto es de código abierto y está disponible bajo la licencia MIT.
+**Solución:** Espera unos minutos e intenta de nuevo
 
-## ⚠️ Advertencia legal
+### ❌ "python no se reconoce"
 
-Este software es solo para uso educativo y personal. Respeta los derechos de autor y los términos de servicio de TikTok. No uses este software para:
+**Solución:** Instala Python desde python.org
 
-- Redistribuir contenido sin permiso del creador
-- Violar los términos de servicio de TikTok
-- Descargar contenido con fines comerciales sin autorización
+---
 
-## 🤝 Contribuciones
+## 💡 TIPS Y TRUCOS
 
-Las contribuciones son bienvenidas. Por favor:
+1. **Para videos MUY virales:** Usa `--min-views 1000000`
+2. **Para descargar muchos videos:** Hazlo en lotes de 20-30
+3. **Organiza por categorías:** Usa `-o` para crear carpetas separadas
+4. **Espera entre descargas:** El programa ya tiene delays automáticos
 
-1. Fork el proyecto
-2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
-3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
-4. Push a la rama (`git push origin feature/AmazingFeature`)
-5. Abre un Pull Request
+---
+
+## ⚠️ NOTAS IMPORTANTES
+
+- **Uso educativo/personal:** Respeta los derechos de autor
+- **No redistribuyas** contenido sin permiso
+- **Respeta los términos** de servicio de TikTok
+- **Créditos:** Menciona a los creadores originales
+
+---
+
+## 🎬 Casos de uso
+
+### Para creadores de contenido
+- 📊 Analizar tendencias para crear contenido similar
+- 🎨 Inspiración para nuevos videos
+- 📈 Estudiar qué funciona y qué no
+
+### Para marketers
+- 🔍 Investigación de mercado
+- 📊 Análisis de competencia
+- 💡 Ideas para campañas
+
+### Para investigadores
+- 📚 Estudios de viralidad
+- 📊 Análisis de redes sociales
+- 🎓 Investigación académica
+
+---
 
 ## 📞 Soporte
 
-Si encuentras algún problema o tienes sugerencias, por favor abre un issue en el repositorio.
+Si tienes problemas:
+
+1. Verifica que Python esté instalado: `python --version`
+2. Verifica las dependencias: `pip list`
+3. Actualiza yt-dlp: `pip install -U yt-dlp`
 
 ---
+
+## 🚀 INICIO RÁPIDO (Resumen)
+
+```bash
+# 1. Instalar
+pip install yt-dlp requests
+
+# 2. Descargar videos virales de hoy
+python tiktok_auto_downloader.py --trending 20
+
+# ¡Listo! Los videos estarán en la carpeta downloads/
+```
+
+---
+
+**🎉 ¡Disfruta descargando videos virales automáticamente!**
 
 **Hecho con ❤️ para la comunidad de TikTok**
