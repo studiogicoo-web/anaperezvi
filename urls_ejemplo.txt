@@ -1,0 +1,9 @@
+# Archivo de ejemplo con URLs de TikTok
+# Una URL por línea
+# Las líneas que empiezan con # son comentarios
+
+# Ejemplo de URLs (reemplaza con URLs reales):
+# https://www.tiktok.com/@user/video/1234567890123456789
+# https://www.tiktok.com/@user/video/9876543210987654321
+
+# Agrega tus URLs aquí:
